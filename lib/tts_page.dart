@@ -54,10 +54,13 @@ class _TtsPageState extends State<TtsPage> {
     });
   }
 
-  void _onSpeechResult(SpeechRecognitionResult result) {
+  void _onSpeechResult(SpeechRecognitionResult result) async {
     setState(() {
       _lastWords = result.recognizedWords;
     });
+    if (_speechToText.isNotListening) {
+      _stopListening();
+    }
   }
 
   @override
